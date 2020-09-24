@@ -44,11 +44,29 @@
                 background-color: yellow;
                 justify-content: space-around;
                 align-items: baseline;
+                align-content:center;
                 text-align:center;
             }
             .main-container > div{
                 background-color: orange;
                 width: 500px;
+                margin: 10px;
+                line-height: 30px;
+                font-size: 18px;
+                font-family: 'Comfortaa'
+            }
+
+            .footer-container{
+                display: flex;
+                flex-direction: r;
+                background-color: yellow;
+                justify-content: space-around;
+                align-items: baseline;
+                align-content:center;
+                text-align:center;
+            }
+            .footer-container > div{
+                background-color: orange;
                 margin: 10px;
                 line-height: 30px;
                 font-size: 18px;
@@ -108,7 +126,9 @@
         </main>
 
         <footer>
-            <p>This website example has been written by Rhon Vincent Ramos, 2020.</p>
+            <div class = "footer-container">
+                <p>This website example has been written by Rhon Vincent Ramos, 2020.</p></div>
+            </div>
         </footer>
     </body>
 </html>

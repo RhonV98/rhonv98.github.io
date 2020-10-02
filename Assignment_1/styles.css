@@ -1,11 +1,15 @@
+
+
 .header {
     display: flex;
-    background-color: #747474;
+    background-color: #752720;
 }
 
 .header-box {
+    font-family: 'Lilita One';
+    font-size: 30px;
     display: flex;
-    background-color:#768bff;
+    background-color:#F7958D;
     width: 100%;
     margin:auto;
 
@@ -14,12 +18,28 @@
 }
 
 .wrapper{
-    background-color: #747474;
+    display: flex;
+    background-color: #752720;
+    justify-content: center;
 }
 
 .body{
     display: flex;
-    background-color: #768bff;
-    width: 75%;
-    margin:auto;
+    justify-content: space-around;
+    background-color: #F7958D;
+    width: 960px;
+
+    margin: 10px;
+    
+    flex-direction:row;
+    flex-wrap: wrap;
+
+}
+
+.caption-body{
+    width: 33%;
+}
+
+.history-body{
+    width:66%;
 }

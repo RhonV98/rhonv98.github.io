@@ -21,25 +21,42 @@
     display: flex;
     background-color: #752720;
     justify-content: center;
+    align-items: center;
 }
 
 .body{
     display: flex;
-    justify-content: space-around;
+
     background-color: #F7958D;
     width: 960px;
 
+    padding: 5px;
     margin: 10px;
-    
-    flex-direction:row;
-    flex-wrap: wrap;
 
+    justify-content: space-around;
+    
+    flex-wrap: wrap;
+}
+
+.image-caption{
+    width: 33%;
+    flex-direction: column;
+    
+
+}
+
+.image-body{
+    max-width: 75%;
 }
 
 .caption-body{
-    width: 33%;
+    background-color: #E5C9BD;
+    text-align: center;
+    height: 100px;
 }
 
 .history-body{
-    width:66%;
+    width: 66%;
+    font-family: sans-serif;
+    background-color: #E5C9BD;
 }

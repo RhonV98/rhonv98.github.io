@@ -106,13 +106,13 @@ countryButton.onclick = function getRandomCountries()
 
         // create the String that holds a random country's name.
         y1 = document.createElement("p1");
-        y2 = document.createTextNode("A random country: " + countryNameList[randNum] + ", ");
+        y2 = document.createTextNode(countryNameList[randNum] + ", ");
         y1.appendChild(y2);
         y1.className = "country-name";
 
         // create the String that holds that country's code.
         z1 = document.createElement("p2");
-        z2 = document.createTextNode("Country Code: " + countryCodeList[randNum]);
+        z2 = document.createTextNode(countryCodeList[randNum]);
         z1.appendChild(z2);
         z1.className = "country-code";
 

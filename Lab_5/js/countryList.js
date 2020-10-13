@@ -81,7 +81,7 @@ var countryListElement   = document.createElement("ol");
 // other necessary variables for the getRandomCountries function
 var countryListCount     = countryList.length;
 var listItem;
-var randNum;
+var randNum, usedNum = 9999;
 var x, y1, y2, z1, z2;
 
 
@@ -104,25 +104,37 @@ countryButton.onclick = function getRandomCountries()
     {
         randNum = Math.floor(Math.random() * countryCodeList.length);
 
-        // create the String that holds a random country's name.
-        y1 = document.createElement("p1");
-        y2 = document.createTextNode(countryNameList[randNum] + ", ");
-        y1.appendChild(y2);
-        y1.className = "country-name";
+        // checks if random number has already been used
+        // reiterate loop and output nothing if true
+        if(randNum == usedNum)
+        {
+            continue;
+        }
+        else
+        {
+            // create the String that holds a random country's name.
+            y1 = document.createElement("p1");
+            y2 = document.createTextNode(countryNameList[randNum] + ", ");
+            y1.appendChild(y2);
+            y1.className = "country-name";
 
-        // create the String that holds that country's code.
-        z1 = document.createElement("p2");
-        z2 = document.createTextNode(countryCodeList[randNum]);
-        z1.appendChild(z2);
-        z1.className = "country-code";
+            // create the String that holds that country's code.
+            z1 = document.createElement("p2");
+            z2 = document.createTextNode(countryCodeList[randNum]);
+            z1.appendChild(z2);
+            z1.className = "country-code";
 
-        // create the list element that holds both Strings
-        listItem = document.createElement("li");
-        listItem.appendChild(y1);
-        listItem.appendChild(z1);
+            // create the list element that holds both Strings
+            listItem = document.createElement("li");
+            listItem.appendChild(y1);
+            listItem.appendChild(z1);
 
-        // append the list item to the country list
-        countryListElement.appendChild(listItem);
+            // append the list item to the country list
+            countryListElement.appendChild(listItem);
+
+            // stores randomly generated number as a used number
+            usedNum = randNum;
+        }
     }
 }
 

@@ -81,8 +81,11 @@ var countryListElement   = document.createElement("ol");
 // other necessary variables for the getRandomCountries function
 var countryListCount     = countryList.length;
 var listItem;
-var randNum, usedNum = 9999;
+var randNum, usedNum = 9999999;
 var x, y1, y2, z1, z2;
+
+// variable used to store any countries display on button click
+var usedCountries = [];
 
 
 // (3) Give your ordered list the class "countries."
@@ -95,13 +98,17 @@ const countryButton = document.querySelector("button");
 
 // (5) Select 25 random countries from your list by writing a separate function that makes use of Math.random.
 // (6) Make sure the selection is unique.
-countryButton.onclick = function getRandomCountries()
+
+// uses an event listener to listen for button clicks
+countryButton.addEventListener('click', getRandomCountries);
+function getRandomCountries()
 {
     document.querySelector(".content").appendChild(countryListContainer);
     countryListContainer.appendChild(countryListElement);
 
     for(x = 0; x < 25; x++)
     {
+        // generates a random number
         randNum = Math.floor(Math.random() * countryCodeList.length);
 
         // checks if random number has already been used
@@ -117,6 +124,9 @@ countryButton.onclick = function getRandomCountries()
             y2 = document.createTextNode(countryNameList[randNum] + ", ");
             y1.appendChild(y2);
             y1.className = "country-name";
+
+            // store that country in the list of used countries
+            usedCountries += countryNameList[randNum];
 
             // create the String that holds that country's code.
             z1 = document.createElement("p2");
@@ -136,17 +146,21 @@ countryButton.onclick = function getRandomCountries()
             usedNum = randNum;
         }
     }
+
+    // (10) Log all unselected countries into the console.
+    // create a separate array to remove used countries from
+    var unusedCountries = countryNameList;
+
+    // function returns a list of countries minus the 25 countries displayed 
+    unusedCountries = unusedCountries.filter(function(c) {return !usedCountries.includes(c)});
+    console.log(unusedCountries);
+
+    // clears used countries list for next button press
+    usedCountries = [];
 }
 
 
-// (10) Log all unselected countries into the console.
-for(x = 0; x < countryListElement.length; x++)
-{
-    if(countryCodeList[x] != countryListElement[x])
-    {
-        console.log(countryCodeList[x]);
-    }
-}
+
 
 
 

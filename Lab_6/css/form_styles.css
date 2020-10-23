@@ -2,6 +2,10 @@ h1 {
     text-align: center;
 }
 
+body {
+    background-color: moccasin;
+}
+
 form {
     margin: 0 auto;
     width: 400px;
@@ -13,7 +17,7 @@ ul {
     padding: 0;
     margin: 0;
 }
-  
+
 form li + li {
     margin-top: 1em;
 }
@@ -21,7 +25,8 @@ form li + li {
 label {
     display: inline-block;
     width: 90px;
-    text-align: right;
+    text-align: left;
+    font-weight: bold;
 }
   
 input, textarea {
@@ -46,4 +51,6 @@ textarea {
   
 button {
     margin-left: .5em;
+    border-radius: 2px;
+    background-color: beige;
 }

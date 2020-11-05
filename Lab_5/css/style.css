@@ -9,5 +9,6 @@
 
 /*(9) Display the country code in a bold font weight.*/
 .country-code {
+    color: grey;
     font-weight: bold
 }

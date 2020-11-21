@@ -1,0 +1,20 @@
+{
+    "name": "ramos_lab8",
+    "version": "1.0.0",
+    "description": "This lab guides us through FetchAPI and hosting web servers.",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+      "type": "git",
+      "url": "rhonv98.github.io"
+    },
+    "author": "Rhon Vincent Ramos",
+    "license": "ISC",
+    "dependencies": {
+      "express": "^4.17.1"
+    }
+}
+  
+  

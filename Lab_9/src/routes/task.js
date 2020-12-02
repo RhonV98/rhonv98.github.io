@@ -33,7 +33,7 @@ router.post('/task', (req, res) => {
 
 //GET
 router.get('/task', (req, res) => {
-    if (!req.url) {
+    if (!req.query.taskId) {
         return res.status(400).send('Missing URL parameter id')
     }
     let sql = "select * from tasklist where id = ?"
@@ -55,7 +55,7 @@ router.get('/task', (req, res) => {
 router.put('/task', (req, res) => {
     console.log("PUT called")
     var data = {
-        id : req.body.id,
+        id : req.body.taskId,
         taskName: req.body.taskName
         
     }
@@ -87,7 +87,7 @@ router.delete('/task', (req, res) => {
     console.log("DELETE called");
     db.run(
         'DELETE FROM tasklist WHERE id = ?',
-        req.query.id,
+        req.query.taskId,
         function (err, result) {
             if (err) {
                 res.status(400).json({"error": res.message})

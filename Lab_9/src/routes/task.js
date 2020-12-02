@@ -55,7 +55,7 @@ router.get('/task', (req, res) => {
 router.put('/task', (req, res) => {
     console.log("PUT called")
     var data = {
-        id : req.body.taskId,
+        id : req.query.taskId,
         taskName: req.body.taskName
         
     }

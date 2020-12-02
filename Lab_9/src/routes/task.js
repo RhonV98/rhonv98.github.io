@@ -37,8 +37,8 @@ router.get('/task', (req, res) => {
         return res.status(400).send('Missing URL parameter id')
     }
     let sql = "select * from tasklist where id = ?"
-    console.log("req.query.taskId: " + data.id)
-    let params = [req.params.id]
+    console.log("req.query.taskId: " + req.query.taskId)
+    let params = [req.query.taskId]
     db.get(sql, params, (err, row) => {
         if (err) {
           res.status(400).json({"error":err.message});
@@ -86,8 +86,8 @@ router.put('/task', (req, res) => {
 router.delete('/task', (req, res) => {
     console.log("DELETE called");
     db.run(
-        'DELETE FROM user WHERE id = ?',
-        req.params.id,
+        'DELETE FROM tasklist WHERE id = ?',
+        req.query.id,
         function (err, result) {
             if (err) {
                 res.status(400).json({"error": res.message})

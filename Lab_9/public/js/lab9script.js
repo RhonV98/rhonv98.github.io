@@ -37,7 +37,7 @@ function submitTask() {
   })
   .catch((err) => {
       console.log(err);
-      document.getElementById("postTaskContent").innerHTML = "Invalid task id: " + taskIdParam;
+      document.getElementById("postTaskContent").innerHTML = "Invalid task id: " + taskId;
   });
  
 }

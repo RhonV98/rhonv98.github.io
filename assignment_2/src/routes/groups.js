@@ -19,22 +19,23 @@ groupRouter.get('/allGroups', (req, res) => {
       });
 })
 
+
 // POST localhost:<port>/task
-peopleRouter.post('/group', async (req, res) => {
+groupRouter.post('/groups', async (req, res) => {
   // now we have access to req.body due to body-parser (see index.js)
   if (!req.body) {
     return resizeBy.status(400).send('Request body is missing')
   }
 
   let group = {
-    groupName: req.body.groupName
+    name: req.body.name
   }
 
   // First make sure that a record doesn't already exist
-  let checkIfExistSql = "select * from people where firstName = ?"
-  console.log("req.body.firstName: " + req.body.firstName)
-  let params = [req.body.firstName]
-  let nameExists = false;
+  let checkIfExistSql = "select * from people where name = ?"
+  console.log("req.body.name: " + req.body.name)
+  let params = [req.body.name]
+  let groupExists = false;
   const rows = await new Promise((resolve, reject) => {
       db.all(checkIfExistSql, params, (err, rows) => {
         if (err) {
@@ -43,9 +44,9 @@ peopleRouter.post('/group', async (req, res) => {
         }
         console.log("ROWS:" + rows.length);
         if(rows.length > 0){
-          nameExists = true;
+          groupExists = true;
           res.json({
-            "message": "Name already exists" 
+            "message": "Group already exists" 
           }).send()
           resolve(rows);
         }
@@ -55,11 +56,11 @@ peopleRouter.post('/group', async (req, res) => {
       });
     });
 
-  console.log("Nameexists:"+ nameExists);
+  console.log("Groupexists:"+ groupExists);
   if(nameExists)
     return;
   
-  var insertsql = 'INSERT INTO people (firstName) VALUES (?)'
+  var insertsql = 'INSERT INTO groups (name) VALUES (?)'
   db.run(insertsql, params, function (err, result) {
     if (err) {
       res.status(400).json({ "error": err.message })
@@ -67,7 +68,7 @@ peopleRouter.post('/group', async (req, res) => {
     }
     res.json({
       "message": "success",
-      "data": person,
+      "data": group,
       "id": this.lastID
     })
   });

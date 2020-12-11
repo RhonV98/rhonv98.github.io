@@ -21,7 +21,7 @@ groupRouter.get('/allGroups', (req, res) => {
 
 
 // POST localhost:<port>/task
-groupRouter.post('/groups', async (req, res) => {
+groupRouter.post('/group', async (req, res) => {
   // now we have access to req.body due to body-parser (see index.js)
   if (!req.body) {
     return resizeBy.status(400).send('Request body is missing')

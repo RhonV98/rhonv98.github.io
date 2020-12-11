@@ -309,7 +309,7 @@ function submitNewGroup() {
   data = { 'groupName': name };
 
   //console.log(JSON.stringify(data))
-  let groupURL = "http://localhost:4000/groups";
+  let groupURL = "http://localhost:4000/group";
   const fetchPromise = fetch(groupURL, {
     method: 'POST', headers: {
       'Content-Type': 'application/json'
@@ -322,18 +322,18 @@ function submitNewGroup() {
     .then((response) => {
       return response.json();
     })
-    .then((group) => {
+    .then((groups) => {
       console.log("Here POST group");
-      console.log(group);
+      console.log(groups);
 
       let message = "ERROR";
-      if (typeof group.id !== "undefined") {
-        groupName = group.data.name;
-        groupId = group.id;
-        message = "Message: " + group.message + " groupName: " + name + "<br>groupId: " + groupId + "<br> ";
+      if (typeof groups.id !== "undefined") {
+        groupName = groups.data.name;
+        groupId = groups.id;
+        message = "Message: " + groups.message + " groupName: " + name + "<br>groupId: " + groupId + "<br> ";
       }
-      else if(typeof group !== "undefined"){
-        message = "Message: " + group.message ;
+      else if(typeof groups !== "undefined"){
+        message = "Message: " + groups.message ;
       }
       document.getElementById("postNewgroupContent").innerHTML = message;
     })

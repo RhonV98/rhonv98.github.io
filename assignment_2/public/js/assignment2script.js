@@ -303,10 +303,10 @@ function submitNewPerson() {
 function submitNewGroup() {
 
   console.log("Called submitNewGroup");
-  let name = document.getElementById("addGroupName").value;
+  let groupName = document.getElementById("addGroupName").value;
 
-  console.log("groupName:" + name);
-  data = { 'groupName': name };
+  console.log("groupName:" + groupName);
+  data = { 'groupName': groupName };
 
   //console.log(JSON.stringify(data))
   let groupURL = "http://localhost:4000/group";
@@ -322,24 +322,24 @@ function submitNewGroup() {
     .then((response) => {
       return response.json();
     })
-    .then((groups) => {
+    .then((group) => {
       console.log("Here POST group");
-      console.log(groups);
+      console.log(group);
 
       let message = "ERROR";
-      if (typeof groups.id !== "undefined") {
-        groupName = groups.data.name;
-        groupId = groups.id;
-        message = "Message: " + groups.message + " groupName: " + name + "<br>groupId: " + groupId + "<br> ";
+      if (typeof group.id !== "undefined") {
+        groupName = group.data.name;
+        groupId = group.id;
+        message = "Message: " + group.message + " groupName: " + name + "<br>groupId: " + groupId + "<br> ";
       }
-      else if(typeof groups !== "undefined"){
-        message = "Message: " + groups.message ;
+      else if(typeof group !== "undefined"){
+        message = "Message: " + group.message ;
       }
-      document.getElementById("postNewgroupContent").innerHTML = message;
+      document.getElementById("postNewGroupContent").innerHTML = message;
     })
     .catch((err) => {
       console.log(err);
-      document.getElementById("postNewgroupContent").innerHTML = "Invalid group : " + data.name;
+      document.getElementById("postNewGroupContent").innerHTML = "Invalid group : " + data.name;
     });
 
 }

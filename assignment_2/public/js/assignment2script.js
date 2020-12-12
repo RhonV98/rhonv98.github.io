@@ -303,10 +303,10 @@ function submitNewPerson() {
 function submitNewGroup() {
 
   console.log("Called submitNewGroup");
-  let groupName = document.getElementById("addGroupName").value;
+  let name = document.getElementById("addGroupName").value;
 
-  console.log("groupName:" + groupName);
-  data = { 'groupName': groupName };
+  console.log("Name:" + name);
+  data = { 'name': name };
 
   //console.log(JSON.stringify(data))
   let groupURL = "http://localhost:4000/group";
@@ -341,6 +341,25 @@ function submitNewGroup() {
       console.log(err);
       document.getElementById("postNewGroupContent").innerHTML = "Invalid group : " + data.name;
     });
+
+}
+
+/*
+ ------ SEARCH TASKS ------
+*/
+function searchTasks() {
+
+  let taskList = [];
+
+  console.log("Called searchTasks");
+  
+  let taskName = document.getElementById("searchTasks").value;
+  console.log("Searching for: " + taskName);
+
+  let searchURL = "http://localhost:4000/task";
+  fetch(searchURL)
+    .then(response => response.json())
+    .then(data => console.log(data));
 
 }
 

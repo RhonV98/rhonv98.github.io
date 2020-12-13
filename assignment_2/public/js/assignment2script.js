@@ -347,6 +347,7 @@ function submitNewGroup() {
 /*
  ------ SEARCH TASKS ------
 */
+
 function searchTasks() {
 
   let taskList = [];
@@ -358,8 +359,9 @@ function searchTasks() {
 
   let searchURL = "http://localhost:4000/task";
   fetch(searchURL)
-    .then(response => response.json())
+    .then(blob => blob.json())
     .then(data => console.log(data));
+  //console.log(taskList);
 
 }
 

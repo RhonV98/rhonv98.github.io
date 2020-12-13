@@ -64,6 +64,28 @@ router.get('/task', (req, res) => {
       });
 })
 
+//GET
+//used to get all taskNames
+router.get('/task', (req, res) => {
+    if (!req.body) {
+        return res.status(400).send('Missing body')
+    }
+    let sql = "select taskName" + " from tasks";
+
+    console.log("req.body: " + req.body)
+    let params = [req.body]
+    db.get(sql, params, (err, row) => {
+        if (err) {
+          res.status(400).json({"error":err.message});
+          return;
+        }
+        res.json({
+            "message":"success",
+            "data":row
+        })
+      });
+})
+
 
 //Update
 /*

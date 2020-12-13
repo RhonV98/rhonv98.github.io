@@ -152,9 +152,8 @@
         <div class="flexbox-item">
             -- Search Tasks --
             <label for="searchTasks">Task name:</label>
-            <input type="text" id="searchTasks" name="searchTasks"/>
+            <input type="text" onkeydown="searchTasks()" id="searchTasks" name="searchTasks"/>
             <br>
-            <button onclick="searchTasks()" class="flexbox-button">Search Task</button>
           
             <p id="searchTasksContent"></p>
 

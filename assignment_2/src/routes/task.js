@@ -65,7 +65,7 @@ router.get('/task', (req, res) => {
 })
 
 //GET
-//used to get all taskNames
+//used to get only taskNames
 router.get('/task', (req, res) => {
     if (!req.body) {
         return res.status(400).send('Missing body')

@@ -361,6 +361,22 @@ function searchTasks() {
   fetch(searchURL)
     .then(blob => blob.json())
     .then(data => console.log(data));
+
+ /* const fetchPromise = fetch(taskURL, {
+    method: 'GET', headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    }, body: JSON.stringify(data)
+  });*/
+/*
+  //console.log(JSON.stringify(data))
+  let personURL = "http://localhost:4000/person";
+  const fetchPromise = fetch(personURL, {
+    method: 'POST', headers: {
+      'Content-Type': 'application/json'
+
+    }, body: JSON.stringify(data)
+  });*/
   //console.log(taskList);
 
 }

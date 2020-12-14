@@ -67,13 +67,15 @@ router.get('/task', (req, res) => {
 //GET
 //used to get only taskNames
 router.get('/task', (req, res) => {
-    if (!req.body) {
-        return res.status(400).send('Missing body')
+    if (!req.query.taskName) {
+        return res.status(400).send('Missing something.')
     }
-    let sql = "select taskName" + " from tasks";
-
-    console.log("req.body: " + req.body)
-    let params = [req.body]
+    let sql = "select tasks.id, taskName, dueDate, complete, priority, firstName, personId, groupId, groups.name as groupName" +
+      " from tasks INNER JOIN PEOPLE on PEOPLE.id = tasks.personId " +
+      " INNER JOIN GROUPS on GROUPS.ID = tasks.groupId" +
+      " where tasks.id = ?"
+    console.log("req.query.taskName: " + req.query.taskName)
+    let params = [req.query.taskName]
     db.get(sql, params, (err, row) => {
         if (err) {
           res.status(400).json({"error":err.message});

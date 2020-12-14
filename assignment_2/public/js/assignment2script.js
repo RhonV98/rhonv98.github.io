@@ -350,17 +350,41 @@ function submitNewGroup() {
 
 function searchTasks() {
 
-  let taskList = [];
-
+  const taskList = [];
   console.log("Called searchTasks");
   
   let taskName = document.getElementById("searchTasks").value;
   console.log("Searching for: " + taskName);
 
-  let searchURL = "http://localhost:4000/task";
+  let searchURL = "http://localhost:4000/allTasks";
   fetch(searchURL)
     .then(blob => blob.json())
-    .then(data => console.log(data));
+    .then(data => taskList.push(...data));
+
+  console.log(taskList);
+  
+  
+  function findMatches(wordToMatch, taskList) 
+  {
+    return taskList.filter(taskFound => {
+      const regex = RegExp(wordToMatch, 'gi');
+      return taskFound.taskName.match(regex);
+    })
+  }
+
+  function displayMatches() {
+    const matchArray = findMatches(this.value, taskList)
+    const html = matchArray.map(taskFound => {
+      const regex = new RegExp(this.value, 'gi');
+      const taskNameHighlight = taskFound.taskName.replace(regex, '<span class="h1">${this.value}</span'>)
+      return '<li><span class="name"${task.taskName}</span></li>';
+    }).join('');
+
+    document.getElementById("searchTasksContent").innerHTML = html;
+  }
+
+  document.getElementById("searchTasks").addEventListener('change', displayMatches);
+  document.getElementById("searchTasks").addEventListener('keyup', displayMatches);
 
 }
 

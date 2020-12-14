@@ -356,7 +356,6 @@ function searchTasks() {
   
   let taskName = document.getElementById("searchTasks").value;
   console.log("Searching for: " + taskName);
-  data = { 'taskName': taskName };
 
   let searchURL = "http://localhost:4000/task";
   fetch(searchURL)

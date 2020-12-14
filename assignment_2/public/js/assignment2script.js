@@ -352,39 +352,44 @@ function searchTasks() {
 
   const taskList = [];
   console.log("Called searchTasks");
-  
-  let taskName = document.getElementById("searchTasks").value;
-  console.log("Searching for: " + taskName);
 
   let searchURL = "http://localhost:4000/allTasks";
-  fetch(searchURL)
-    .then(blob => blob.json())
-    .then(data => taskList.push(...data));
 
-  console.log(taskList);
-  
-  
-  function findMatches(wordToMatch, taskList) 
-  {
-    return taskList.filter(taskFound => {
-      const regex = RegExp(wordToMatch, 'gi');
-      return taskFound.taskName.match(regex);
-    })
+  fetch(searchURL)
+  .then(blob => blob.json())
+  .then(data => taskList.push(...data));
+
+  function findMatches(wordToMatch, taskList) {
+    return taskList.filter(place => {
+      // here we need to figure out if the city or state matches what was searched
+      const regex = new RegExp(wordToMatch, 'gi');
+      return place.taskList.match(regex)
+    });
+  }
+
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
   function displayMatches() {
-    const matchArray = findMatches(this.value, taskList)
-    const html = matchArray.map(taskFound => {
+    const matchArray = findMatches(this.value, taskList);
+    const html = matchArray.map(place => {
       const regex = new RegExp(this.value, 'gi');
-      const taskNameHighlight = taskFound.taskName.replace(regex, '<span class="h1">${this.value}</span'>)
-      return '<li><span class="name"${task.taskName}</span></li>';
+      const tasksName = place.taskList.replace(regex, `<span class="hl">${this.value}</span>`);
+      return `
+        <li>
+          <span class="name">${tasksName}</span>
+        </li>
+      `;
     }).join('');
-
-    document.getElementById("searchTasksContent").innerHTML = html;
+    suggestions.innerHTML = html;
   }
 
-  document.getElementById("searchTasks").addEventListener('change', displayMatches);
-  document.getElementById("searchTasks").addEventListener('keyup', displayMatches);
+  const searchInput = document.getElementById('searchTasks');
+  const suggestions = document.getElementById('searchTasksContent');
+
+  searchInput.addEventListener('change', displayMatches);
+  searchInput.addEventListener('keyup', displayMatches);
 
 }
 

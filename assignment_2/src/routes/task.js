@@ -43,39 +43,15 @@ router.post('/task', (req, res) => {
 
 //GET
 router.get('/task', (req, res) => {
-    if (!req.query.taskId) {
-        return res.status(400).send('Missing URL parameter id')
+    if (!req.query.taskId && !req.query.taskName) {
+        return res.status(400).send('Missing URL parameter id or task name');
     }
     let sql = "select tasks.id, taskName, dueDate, complete, priority, firstName, personId, groupId, groups.name as groupName" +
       " from tasks INNER JOIN PEOPLE on PEOPLE.id = tasks.personId " +
       " INNER JOIN GROUPS on GROUPS.ID = tasks.groupId" +
-      " where tasks.id = ?"
-    console.log("req.query.taskId: " + req.query.taskId)
+      " where tasks.id = ?" + " OR taskName = ?"
+    console.log("req.query.taskId and req.query.taskName: " + req.query.taskId + " " + req.query.taskName)
     let params = [req.query.taskId]
-    db.get(sql, params, (err, row) => {
-        if (err) {
-          res.status(400).json({"error":err.message});
-          return;
-        }
-        res.json({
-            "message":"success",
-            "data":row
-        })
-      });
-})
-
-//GET
-//used to get only taskNames
-router.get('/task', (req, res) => {
-    if (!req.query.taskName) {
-        return res.status(400).send('Missing something.')
-    }
-    let sql = "select tasks.id, taskName, dueDate, complete, priority, firstName, personId, groupId, groups.name as groupName" +
-      " from tasks INNER JOIN PEOPLE on PEOPLE.id = tasks.personId " +
-      " INNER JOIN GROUPS on GROUPS.ID = tasks.groupId" +
-      " where tasks.id = ?"
-    console.log("req.query.taskName: " + req.query.taskName)
-    let params = [req.query.taskName]
     db.get(sql, params, (err, row) => {
         if (err) {
           res.status(400).json({"error":err.message});

@@ -348,7 +348,7 @@ function submitNewGroup() {
  ------ SEARCH TASKS ------
 */
 
-function searchTasks() {
+
 
   const taskList = [];
   console.log("Called searchTasks");
@@ -357,25 +357,21 @@ function searchTasks() {
 
   fetch(searchURL)
   .then(blob => blob.json())
-  .then(data => taskList.push(...data));
+  .then(data => taskList.push(...data.data));
 
   function findMatches(wordToMatch, taskList) {
     return taskList.filter(place => {
-      // here we need to figure out if the city or state matches what was searched
+      // here we need to figure out if the task matches what was searched
       const regex = new RegExp(wordToMatch, 'gi');
-      return place.taskList.match(regex)
+      return place.taskName.match(regex)
     });
-  }
-
-  function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   }
 
   function displayMatches() {
     const matchArray = findMatches(this.value, taskList);
     const html = matchArray.map(place => {
       const regex = new RegExp(this.value, 'gi');
-      const tasksName = place.taskList.replace(regex, `<span class="hl">${this.value}</span>`);
+      const tasksName = place.taskName.replace(regex, `<span class="hl">${this.value}</span>`);
       return `
         <li>
           <span class="name">${tasksName}</span>
@@ -391,7 +387,7 @@ function searchTasks() {
   searchInput.addEventListener('change', displayMatches);
   searchInput.addEventListener('keyup', displayMatches);
 
-}
+
 
 /*
    ------------   Code for onload of page ------------

@@ -64,7 +64,7 @@ router.get('/task', (req, res) => {
       });
 })
 
-//GET all people
+//GET all tasks
 router.get('/allTasks', (req, res) => {
 
     console.log("Get all tasks");
